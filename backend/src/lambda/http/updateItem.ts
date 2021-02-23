@@ -2,19 +2,19 @@ import 'source-map-support/register'
 
 import { APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda'
 
-import { UpdateTodoRequest } from '../../requests/UpdateTodoRequest'
-import {updateTodo} from '../../businessLogic/todos'
-import { getUserId } from '../../lambda/utils'
+import { UpdateItemRequest } from '../../requests/UpdateItemRequest'
+import {updateItem} from '../../businessLogic/itemsBussinesLogic'
+import { getUserId } from '../utils'
 import { createLogger } from '../../utils/logger'
-const logger = createLogger('updateTodos')
+const logger = createLogger('updateItems')
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   logger.info('Processing event: ', event)
-  const todoId = event.pathParameters.todoId
-  const updatedTodo: UpdateTodoRequest = JSON.parse(event.body)
+  const itemId = event.pathParameters.itemId
+  const updatedItem: UpdateItemRequest = JSON.parse(event.body)
   const userId= getUserId(event)
-  const newTodo = await updateTodo(updatedTodo, todoId,userId)
-  logger.info('updated todo: ', newTodo)
+  const newItem = await updateItem(updatedItem, itemId,userId)
+  logger.info('updated item: ', newItem)
   return {
     statusCode: 201,
     headers: {
@@ -22,7 +22,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
       'Access-Control-Allow-Credentials': true
     },
     body: JSON.stringify({
-      newTodo
+      newItem
     })
   }
 

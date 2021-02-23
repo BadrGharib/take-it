@@ -1,15 +1,15 @@
 import 'source-map-support/register'
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
-import {deleteTodo} from '../../businessLogic/todos'
-import { getUserId } from '../../lambda/utils'
+import {deleteItem} from '../../businessLogic/itemsBussinesLogic'
+import { getUserId } from '../utils'
 import { createLogger } from '../../utils/logger'
-const logger = createLogger('deleteTodo')
+const logger = createLogger('deleteItem')
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   logger.info('Processing event: ', event)
-  const todoId = event.pathParameters.todoId
+  const itemId = event.pathParameters.itemId
   const userId= getUserId(event)
-  await deleteTodo(todoId,userId)
+  await deleteItem(itemId,userId)
 
   return {
     statusCode: 201,

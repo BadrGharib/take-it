@@ -194,12 +194,12 @@ export class AddItem extends React.PureComponent<
         <Form onSubmit={this.handleSubmit}>
         <Form.Input onChange={this.handelTitleChange} value={this.state.title} fluid label='title' placeholder='title' />
         <Form.Field >
-          <Input labelPosition='right' type='text' placeholder='Amount'>
+          <Input labelPosition='right' type='text' placeholder='Price'>
             <Label basic>$</Label>
             <input value={this.state.price} onChange={this.handelPriceChange} />
          </Input>
         </Form.Field>
-        <Form.TextArea value={this.state.info} onChange={this.handelInfoChange} label='About' placeholder='Tell us more about your item ...' />
+        <Form.TextArea value={this.state.info} onChange={this.handelInfoChange} label='About' placeholder='Tell us more about your item snd your contact info ...' />
         <Form.Field style={{display:'flex'}} >
             {
          selectedItem !=='' 

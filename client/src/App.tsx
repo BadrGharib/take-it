@@ -3,7 +3,6 @@ import { Link, Route, Router, Switch } from 'react-router-dom'
 import { Grid, Menu, Segment } from 'semantic-ui-react'
 
 import Auth from './auth/Auth'
-import { Edititem } from './components/EditItem'
 import {AddItem} from './components/AddItem'
 import { LogIn } from './components/LogIn'
 import { NotFound } from './components/NotFound'

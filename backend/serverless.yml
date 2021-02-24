@@ -1,4 +1,4 @@
-service: serverless-takeit-app
+service: serverless-sell-anything-app
   #name: serverless-item-app
 
 plugins:
@@ -19,7 +19,7 @@ provider:
   environment:
     ITEMS_TABLE: Items-${self:provider.stage}
     INDEX_NAME: itemIdIndex
-    ITEMS_IMAGES_S3_BUCKET: items-images-badr10112${self:provider.stage}
+    ITEMS_IMAGES_S3_BUCKET: items-images-badr10113${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     AUTH_0_SECRET: AOxrTwLPa4-S-Epw4sbBQUcyxMgxAl9prHVLQUN4k3RhGXSKabzHvt0R_76OMU2V
   

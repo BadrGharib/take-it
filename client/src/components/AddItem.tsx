@@ -25,9 +25,9 @@ interface AddItemProps {
 interface AddItemState {
   file: any
   uploadState: UploadState,
-  title: string,
-  info: string,
-  price: string,
+  title: any,
+  info: any,
+  price: any,
   selectedItem: any
   state:boolean
 }
@@ -39,9 +39,9 @@ export class AddItem extends React.PureComponent<
   state: AddItemState = {
     file: undefined,
     uploadState: UploadState.NoUpload,
-    title: '',
-    info: '',
-    price: '',
+    title: null,
+    info: null,
+    price: null,
     selectedItem: '',
     state:false
   }
@@ -55,14 +55,14 @@ export class AddItem extends React.PureComponent<
     })
   }
   handelTitleChange=(e: React.ChangeEvent<HTMLInputElement>)=>{
-    this.setState({title:e.target.value})
+    this.setState({title:e.target.value||null})
   }
   handelInfoChange=(e: React.FormEvent<HTMLTextAreaElement>,data:any)=>{
-    this.setState({info:data.value})
+    this.setState({info:data.value||null})
     
   }
   handelPriceChange=(e: React.ChangeEvent<HTMLInputElement>)=>{
-    this.setState({price:e.target.value})
+    this.setState({price:e.target.value||null})
   }
 
   handleSubmit = async (event: React.SyntheticEvent) => {

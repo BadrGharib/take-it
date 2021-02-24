@@ -23,37 +23,6 @@ provider:
     SIGNED_URL_EXPIRATION: 300
     AUTH_0_SECRET: AOxrTwLPa4-S-Epw4sbBQUcyxMgxAl9prHVLQUN4k3RhGXSKabzHvt0R_76OMU2V
   
-  #badr
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-      Resource: arn:aws:s3:::${self:provider.environment.ITEMS_IMAGES_S3_BUCKET}
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-      Resource: arn:aws:s3:::${self:provider.environment.ITEMS_IMAGES_S3_BUCKET}/*  
-    # - Effect: Allow
-    #   Action:
-    #     - dynamodb:Scan
-    #     - dynamodb:PutItem
-    #     - dynamodb:GetItem
-    #     - dynamodb:UpdateItem
-    #     - dynamodb:Query
-    #     - dynamodb:DeleteItem
-    #   Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.ITEMS_TABLE}
-    # - Effect: Allow
-    #   Action:
-    #     - dynamodb:Scan
-    #     - dynamodb:PutItem
-    #     - dynamodb:GetItem
-    #     - dynamodb:UpdateItem
-    #     - dynamodb:Query
-    #     - dynamodb:DeleteItem
-    #   Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.ITEMS_TABLE}/index/${self:provider.environment.INDEX_NAME}   
-
 functions:
 
   Auth:
@@ -77,6 +46,14 @@ functions:
         Action:
           - dynamodb:Scan
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.ITEMS_TABLE}/* 
+      - Effect: Allow
+        Action:
+          - s3:GetObject
+        Resource: arn:aws:s3:::${self:provider.environment.ITEMS_IMAGES_S3_BUCKET}
+      - Effect: Allow
+        Action:
+          - s3:GetObject
+        Resource: arn:aws:s3:::${self:provider.environment.ITEMS_IMAGES_S3_BUCKET}/*    
 
   GetMyItems:
     handler: src/lambda/http/getMyItems.handler
@@ -95,6 +72,14 @@ functions:
         Action:
           - dynamodb:Query
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.ITEMS_TABLE}/*
+      - Effect: Allow
+        Action:
+          - s3:GetObject
+        Resource: arn:aws:s3:::${self:provider.environment.ITEMS_IMAGES_S3_BUCKET}
+      - Effect: Allow
+        Action:
+          - s3:GetObject
+        Resource: arn:aws:s3:::${self:provider.environment.ITEMS_IMAGES_S3_BUCKET}/*    
           
 
   # TODO: Configure this function
@@ -178,7 +163,15 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:UpdateItem
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.ITEMS_TABLE}/*           
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.ITEMS_TABLE}/*  
+      - Effect: Allow
+        Action:
+          - s3:PutObject
+        Resource: arn:aws:s3:::${self:provider.environment.ITEMS_IMAGES_S3_BUCKET}
+      - Effect: Allow
+        Action:
+          - s3:PutObject
+        Resource: arn:aws:s3:::${self:provider.environment.ITEMS_IMAGES_S3_BUCKET}/*           
 
 resources:
   Resources:
